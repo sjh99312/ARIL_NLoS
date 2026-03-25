@@ -1,229 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARIL - Autonomous Robotics Intelligence Lab</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARIL | Autonomous Robotics Intelligence Lab</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-<style>
-* { box-sizing: border-box; scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: #1f2937;
+            background: linear-gradient(to bottom, #f8fafc, #eef2ff);
+        }
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Roboto, Arial;
-    background: linear-gradient(to bottom, #f8fafc, #eef2ff);
-    color: #1f2937;
-}
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-a { text-decoration: none; color: inherit; }
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(49, 46, 129, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
 
-.navbar {
-    position: sticky;
-    top: 0;
-    background: rgba(49,46,129,0.95);
-    color: white;
-    padding: 18px 24px;
-}
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
 
-.nav-inner {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-}
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
 
-.nav-links { display: flex; gap: 20px; }
+        .nav-links {
+            display: flex;
+            gap: 26px;
+            flex-wrap: wrap;
+        }
 
-.page {
-    max-width: 1000px;
-    margin: auto;
-    padding: 40px 20px;
-}
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.92);
+            font-weight: 500;
+            transition: 0.2s ease;
+        }
 
-.title {
-    font-size: 2.8rem;
-    font-weight: 800;
-    text-align: center;
-}
+        .nav-links a:hover {
+            color: #c7d2fe;
+        }
 
-.section { margin-bottom: 60px; }
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 20px 80px;
+        }
 
-h2 {
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 10px;
-}
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            margin-bottom: 30px;
+        }
 
-.content-box, .abstract-box {
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
-    border: 1px solid #e5e7eb;
-}
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
 
-.placeholder-media {
-    height: 250px;
-    background: #e0e7ff;
-    border-radius: 12px;
-    margin-bottom: 20px;
-}
+        .title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0 0 18px;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            color: #111827;
+        }
 
-.member-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-    gap: 20px;
-}
+        .subtitle {
+            max-width: 760px;
+            margin: 0 auto 28px;
+            color: #4b5563;
+            font-size: 1.08rem;
+        }
 
-.member-card {
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
-    text-align: center;
-}
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
 
-.list-item {
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
-    margin-bottom: 15px;
-}
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
 
-.btn {
-    padding: 8px 14px;
-    border-radius: 8px;
-    margin-right: 8px;
-}
+        .btn-primary {
+            background: #4338ca;
+            color: white;
+            box-shadow: 0 10px 24px rgba(67, 56, 202, 0.22);
+        }
 
-.btn-primary { background: #4338ca; color: white; }
-.btn-secondary { border: 1px solid #4338ca; color: #4338ca; }
+        .btn-primary:hover {
+            background: #3730a3;
+        }
 
-</style>
+        .btn-secondary {
+            background: white;
+            color: #3730a3;
+            border: 1px solid #c7d2fe;
+        }
+
+        .btn-secondary:hover {
+            background: #eef2ff;
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+            padding: 36px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        h1, h2, h3 {
+            color: #111827;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 12px;
+            margin-top: 0;
+            margin-bottom: 22px;
+        }
+
+        .abstract-box,
+        .content-box {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            padding: 22px 24px;
+            font-size: 1.03rem;
+            color: #374151;
+        }
+
+        .placeholder-media {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+            border: 1.5px dashed #a5b4fc;
+            border-radius: 18px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4338ca;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .two-media {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .member-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 22px;
+            text-align: center;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .member-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .member-photo {
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c7d2fe, #bfdbfe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3730a3;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .member-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .member-role {
+            color: #4338ca;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .member-desc {
+            color: #6b7280;
+            font-size: 0.96rem;
+        }
+
+        .list-card {
+            display: grid;
+            gap: 16px;
+        }
+
+        .list-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            padding: 20px 22px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .list-item strong {
+            display: block;
+            font-size: 1.02rem;
+            margin-bottom: 6px;
+            color: #111827;
+        }
+
+        .list-meta {
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin-top: 6px;
+        }
+
+        .paper-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .paper-link {
+            display: inline-block;
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .paper-link.primary {
+            background: #4338ca;
+            color: white;
+        }
+
+        .paper-link.primary:hover {
+            background: #3730a3;
+        }
+
+        .paper-link.secondary {
+            background: #eef2ff;
+            color: #3730a3;
+            border: 1px solid #c7d2fe;
+        }
+
+        .paper-link.secondary:hover {
+            background: #e0e7ff;
+        }
+
+        .ack {
+            margin-top: 70px;
+            padding-top: 30px;
+            border-top: 1px solid #d1d5db;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.96rem;
+        }
+
+        footer {
+            text-align: center;
+            color: #6b7280;
+            padding: 20px 0 10px;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+            }
+
+            .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+
+            .two-media {
+                grid-template-columns: 1fr;
+            }
+
+            .main-card {
+                padding: 24px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<header class="navbar">
-    <div class="nav-inner">
-        <div><b>ARIL</b></div>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#publications">Publications</a>
-            <a href="#members">Members</a>
+    <header class="navbar">
+        <div class="nav-inner">
+            <div class="logo">ARIL</div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#direction">Research Direction</a>
+                <a href="#focus">Research Focus</a>
+                <a href="#members">Members</a>
+                <a href="#publications">Publications</a>
+                <a href="#seminar">Seminar</a>
+                <a href="#news">News</a>
+                <a href="#alumni">Alumni</a>
+            </nav>
         </div>
-    </div>
-</header>
+    </header>
 
-<main class="page">
+    <main class="page">
+        <section class="hero">
+            <div class="hero-badge">Autonomous Robotics Intelligence Lab</div>
+            <h1 class="title">ARIL</h1>
+            <p class="subtitle">
+                We study intelligent perception, reasoning, and decision-making systems for autonomous robots
+                operating in complex real-world environments.
+            </p>
+            <div class="hero-buttons">
+                <a href="#publications" class="btn btn-primary">View Publications</a>
+                <a href="#members" class="btn btn-secondary">Team Members</a>
+            </div>
+        </section>
 
-<!-- HERO -->
-<section class="section">
-    <h1 class="title">Autonomous Robotics Intelligence Lab</h1>
-    <p style="text-align:center;">
-        We develop intelligent perception and reasoning systems for autonomous robots
-        operating in complex real-world environments.
-    </p>
-</section>
+        <div class="main-card">
+            <section class="section">
+                <div class="placeholder-media">Lab Overview / Main Figure / Team Photo</div>
+            </section>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-    <h2>About ARIL</h2>
-    <div class="content-box">
-        The Autonomous Robotics Intelligence Lab (ARIL) focuses on building intelligent
-        systems that can perceive, understand, and interact with complex environments.
+            <section class="section" id="about">
+                <h2>About ARIL</h2>
+                <div class="content-box">
+                    The Autonomous Robotics Intelligence Lab (ARIL) focuses on building intelligent systems
+                    that can perceive, understand, and interact with complex real-world environments.
+                    Our research aims to develop robust robotic intelligence for scenarios where observations
+                    are incomplete, uncertain, or dynamically changing.
+                    <br><br>
+                    We are particularly interested in autonomous driving, robotic perception, multi-modal sensing,
+                    and physically grounded reasoning. By combining machine learning with system-level design,
+                    we seek to create autonomous systems that are both reliable and practical for deployment
+                    in real-world applications.
+                </div>
+            </section>
 
-        <br><br>
+            <section class="section" id="direction">
+                <h2>Research Direction</h2>
+                <div class="abstract-box">
+                    Our research direction centers on perception and reasoning under uncertainty.
+                    In many real environments, autonomous systems cannot rely solely on direct line-of-sight
+                    observations because important information may be partially occluded, distorted, or hidden.
+                    <br><br>
+                    To address this, we study methods that leverage indirect cues, spatial constraints,
+                    and multi-modal sensor information to improve robustness in perception and localization.
+                    Our goal is to design intelligent robotic systems that can infer hidden structure,
+                    reason beyond immediate observations, and make reliable decisions in safety-critical settings.
+                </div>
+            </section>
 
-        Our research spans autonomous driving, robotic perception, multi-modal sensing,
-        and edge AI systems. We aim to enable robust decision-making in situations where
-        direct observations are incomplete or unreliable.
-    </div>
-</section>
+            <section class="section" id="focus">
+                <h2>Research Focus</h2>
+                <div class="two-media">
+                    <div class="placeholder-media">Autonomous Driving / Robotics Scenario</div>
+                    <div class="placeholder-media">Multi-modal Perception / NLoS Example</div>
+                </div>
+                <div class="content-box">
+                    At ARIL, we explore research topics spanning autonomous robotics, intelligent perception,
+                    and robust scene understanding. A major focus of our work is how robots can operate
+                    effectively in challenging conditions such as occlusion, limited visibility, and
+                    Non-Line-of-Sight (NLoS) environments.
+                    <br><br>
+                    We investigate how indirect cues such as reflections, acoustic information, radar responses,
+                    and other multi-sensor signals can be integrated with vision-based perception to recover
+                    hidden information. Through this, we aim to improve localization, environment understanding,
+                    and decision-making in applications such as autonomous driving, urban robotics, and edge AI systems.
+                    <br><br>
+                    In addition, we are interested in real-time deployment, computational efficiency,
+                    and system optimization so that our models can operate robustly on practical robotic platforms.
+                </div>
+            </section>
 
-<!-- RESEARCH DIRECTION -->
-<section class="section">
-    <h2>Research Direction</h2>
-    <div class="abstract-box">
-        We focus on perception under uncertainty, particularly in Non-Line-of-Sight (NLoS)
-        environments where objects are not directly visible.
+            <section class="section" id="members">
+                <h2>Members</h2>
+                <div class="member-grid">
+                    <div class="member-card">
+                        <div class="member-photo">MG</div>
+                        <div class="member-name">Mingu Jeon</div>
+                        <div class="member-role">Principal Investigator</div>
+                        <div class="member-desc">Professor leading ARIL research in autonomous robotics and intelligent perception.</div>
+                    </div>
 
-        <br><br>
+                    <div class="member-card">
+                        <div class="member-photo">HY</div>
+                        <div class="member-name">Hee-Yeun Kim</div>
+                        <div class="member-role">Ph.D Student</div>
+                        <div class="member-desc">Researcher in robotic intelligence and advanced perception systems.</div>
+                    </div>
 
-        Our goal is to develop reflection-aware reasoning systems that leverage indirect
-        signals, spatial constraints, and multi-modal data to improve localization and
-        scene understanding.
-    </div>
-</section>
+                    <div class="member-card">
+                        <div class="member-photo">BG</div>
+                        <div class="member-name">Byeonggyu Park</div>
+                        <div class="member-role">Ph.D Student</div>
+                        <div class="member-desc">Researcher focusing on autonomous systems and robust sensing.</div>
+                    </div>
 
-<!-- RESEARCH FOCUS -->
-<section class="section">
-    <h2>Research Focus</h2>
+                    <div class="member-card">
+                        <div class="member-photo">HB</div>
+                        <div class="member-name">Hanbi Baek</div>
+                        <div class="member-role">Ph.D Student</div>
+                        <div class="member-desc">Researcher interested in multi-modal understanding and robot perception.</div>
+                    </div>
 
-    <div class="placeholder-media"></div>
+                    <div class="member-card">
+                        <div class="member-photo">JH</div>
+                        <div class="member-name">Jeonghoo Seong</div>
+                        <div class="member-role">M.S Student</div>
+                        <div class="member-desc">Researching perception and reasoning for challenging real-world robotic environments.</div>
+                    </div>
+                </div>
+            </section>
 
-    <div class="content-box">
-        We investigate how robots can understand environments where visibility is limited.
-        This includes leveraging reflection signals, multi-sensor fusion, and physically
-        grounded reasoning.
+            <section class="section" id="publications">
+                <h2>Publications</h2>
+                <div class="list-card">
+                    <div class="list-item">
+                        <strong>Reflection-Aware Reasoning for Non-Line-of-Sight Pedestrian Localization</strong>
+                        Seong Jeonghoo, Author B, Author C
+                        <div class="list-meta">Conference / Journal, 2026</div>
+                        <div class="paper-links">
+                            <a href="#" class="paper-link secondary">PDF</a>
+                            <a href="#" class="paper-link secondary">Code</a>
+                            <a href="papers/paper1.html" class="paper-link primary">Project Page</a>
+                        </div>
+                    </div>
 
-        <br><br>
+                    <div class="list-item">
+                        <strong>Robust Localization under Occlusion using Reflection Cues</strong>
+                        Author A, Author B, Author C
+                        <div class="list-meta">Conference / Journal, 2025</div>
+                        <div class="paper-links">
+                            <a href="#" class="paper-link secondary">PDF</a>
+                            <a href="#" class="paper-link secondary">Code</a>
+                            <a href="papers/paper2.html" class="paper-link primary">Project Page</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        Our work integrates vision, radar, lidar, and audio to improve robustness in
-        real-world scenarios such as autonomous driving and urban robotics.
-    </div>
-</section>
+            <section class="section" id="seminar">
+                <h2>Seminar</h2>
+                <div class="list-card">
+                    <div class="list-item">
+                        <strong>Weekly Lab Seminar</strong>
+                        Discussion on recent advances in autonomous robotics, perception, and reasoning.
+                        <div class="list-meta">Every Friday, 2:00 PM</div>
+                    </div>
 
-<!-- MEMBERS -->
-<section class="section" id="members">
-    <h2>Members</h2>
-    <div class="member-grid">
+                    <div class="list-item">
+                        <strong>Reading Group</strong>
+                        Paper review sessions on robotics, multi-modal sensing, and intelligent systems.
+                        <div class="list-meta">Bi-weekly, Wednesday, 6:00 PM</div>
+                    </div>
+                </div>
+            </section>
 
-        <div class="member-card">
-            <b>Mingu Jeon</b><br>Professor
+            <section class="section" id="news">
+                <h2>News</h2>
+                <div class="list-card">
+                    <div class="list-item">
+                        <strong>Paper Accepted</strong>
+                        Our latest work on robust perception and localization has been accepted.
+                        <div class="list-meta">March 2026</div>
+                    </div>
+
+                    <div class="list-item">
+                        <strong>New Team Members Joined</strong>
+                        We welcomed new researchers to ARIL.
+                        <div class="list-meta">February 2026</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="alumni">
+                <h2>Alumni</h2>
+                <div class="list-card">
+                    <div class="list-item">
+                        <strong>Alumni A</strong>
+                        Now at Samsung Research
+                    </div>
+
+                    <div class="list-item">
+                        <strong>Alumni B</strong>
+                        Now pursuing Ph.D. studies
+                    </div>
+                </div>
+            </section>
+
+            <div class="ack">
+                <p><strong>Acknowledgement</strong></p>
+                <p>
+                    We thank our collaborators, lab members, and funding agencies for their support.
+                </p>
+            </div>
         </div>
 
-        <div class="member-card">
-            <b>Hee-Yeun Kim</b><br>Ph.D Student
-        </div>
-
-        <div class="member-card">
-            <b>Byeonggyu Park</b><br>Ph.D Student
-        </div>
-
-        <div class="member-card">
-            <b>Hanbi Baek</b><br>Ph.D Student
-        </div>
-
-        <div class="member-card">
-            <b>Jeonghoo Seong</b><br>M.S Student
-        </div>
-
-    </div>
-</section>
-
-<!-- PUBLICATIONS -->
-<section class="section" id="publications">
-    <h2>Publications</h2>
-
-    <div class="list-item">
-        <strong>Reflection-Aware Reasoning for Non-Line-of-Sight Pedestrian Localization</strong>
-        <div>Seong Jeonghoo, Author B, Author C</div>
-        <br>
-        <a href="#" class="btn btn-secondary">PDF</a>
-        <a href="#" class="btn btn-secondary">Code</a>
-        <a href="papers/paper1.html" class="btn btn-primary">Project Page</a>
-    </div>
-
-    <div class="list-item">
-        <strong>Robust Localization under Occlusion using Reflection Cues</strong>
-        <div>Author A, Author B, Author C</div>
-        <br>
-        <a href="#" class="btn btn-secondary">PDF</a>
-        <a href="#" class="btn btn-secondary">Code</a>
-        <a href="papers/paper2.html" class="btn btn-primary">Project Page</a>
-    </div>
-
-</section>
-
-</main>
+        <footer>
+            © 2026 ARIL — Autonomous Robotics Intelligence Lab
+        </footer>
+    </main>
 
 </body>
 </html>
