@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NLoS | Non Line of Sight team</title>
+    <title>ARIL | Autonomous Robotics Intelligence Lab</title>
     <style>
         * {
             box-sizing: border-box;
@@ -264,14 +264,51 @@
         .list-item strong {
             display: block;
             font-size: 1.02rem;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: #111827;
+            line-height: 1.5;
         }
 
         .list-meta {
             font-size: 0.95rem;
             color: #6b7280;
             margin-top: 6px;
+        }
+
+        /* ===== Publications 전용 추가 스타일 ===== */
+        .pub-item {
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .pub-thumb {
+            width: 190px;
+            height: 108px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #dbe2ea;
+            background: #eef2f7;
+            flex-shrink: 0;
+        }
+
+        .pub-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .pub-content {
+            min-width: 0;
+        }
+
+        .pub-authors {
+            font-size: 0.98rem;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 6px;
         }
 
         .paper-links {
@@ -282,31 +319,49 @@
         }
 
         .paper-link {
-            display: inline-block;
-            padding: 9px 14px;
-            border-radius: 10px;
-            font-size: 0.92rem;
-            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7px 16px;
+            border-radius: 999px;
+            font-size: 0.94rem;
+            font-weight: 500;
+            line-height: 1;
             transition: 0.2s ease;
+            border: 1px solid transparent;
         }
 
-        .paper-link.primary {
-            background: #4338ca;
-            color: white;
+        .paper-link:hover {
+            transform: translateY(-1px);
         }
 
-        .paper-link.primary:hover {
-            background: #3730a3;
+        .paper-link.ieee {
+            color: #2563eb;
+            background: #eff6ff;
+            border-color: #bfdbfe;
         }
 
-        .paper-link.secondary {
+        .paper-link.arxiv {
+            color: #1d4ed8;
             background: #eef2ff;
-            color: #3730a3;
-            border: 1px solid #c7d2fe;
+            border-color: #c7d2fe;
         }
 
-        .paper-link.secondary:hover {
-            background: #e0e7ff;
+        .paper-link.video {
+            color: #dc2626;
+            background: #fff1f2;
+            border-color: #fda4af;
+        }
+
+        .paper-link.project {
+            color: white;
+            background: #4338ca;
+            border-color: #4338ca;
+        }
+
+        .paper-link.project:hover {
+            background: #3730a3;
+            border-color: #3730a3;
         }
 
         .ack {
@@ -346,6 +401,15 @@
             .main-card {
                 padding: 24px;
             }
+
+            .pub-item {
+                grid-template-columns: 1fr;
+            }
+
+            .pub-thumb {
+                width: 100%;
+                height: 180px;
+            }
         }
     </style>
 </head>
@@ -353,7 +417,7 @@
 
     <header class="navbar">
         <div class="nav-inner">
-            <div class="logo">NLoS</div>
+            <div class="logo">ARIL</div>
             <nav class="nav-links">
                 <a href="#about">About</a>
                 <a href="#direction">Research Direction</a>
@@ -369,8 +433,8 @@
 
     <main class="page">
         <section class="hero">
-            <div class="hero-badge">Non Line of Sight team</div>
-            <h1 class="title">NLoS</h1>
+            <div class="hero-badge">Autonomous Robotics Intelligence Lab</div>
+            <h1 class="title">ARIL</h1>
             <p class="subtitle">
                 We study intelligent perception, reasoning, and decision-making systems for autonomous robots
                 operating in complex real-world environments.
@@ -480,60 +544,106 @@
             <section class="section" id="publications">
                 <h2>Publications</h2>
                 <div class="list-card">
-                    <div class="list-item">
-                        <strong>"Reflection-Aware Reasoning for Non-Line-of-Sight Pedestrian Localization"</strong>
-                        Byeongguy Park, Mingu Jeon, and Seong-Woo Kim
-                        <div class="list-meta">Conference / Journal, 2026</div>
-                        <div class="paper-links">
-                            <a href="#" class="paper-link secondary">PDF</a>
-                            <a href="#" class="paper-link secondary">Code</a>
-                            <a href="papers/paper1.html" class="paper-link primary">Project Page</a>
+
+                    <div class="list-item pub-item">
+                        <div class="pub-thumb">
+                            <img src="assets/pub0.jpg" alt="Reflection-aware reasoning thumbnail">
+                        </div>
+                        <div class="pub-content">
+                            <strong>"Reflection-Aware Reasoning for Non-Line-of-Sight Pedestrian Localization"</strong>
+                            <div class="pub-authors">
+                                Byeongguy Park, Mingu Jeon, and Seong-Woo Kim
+                            </div>
+                            <div class="list-meta">Conference / Journal, 2026</div>
+                            <div class="paper-links">
+                                <a href="#" class="paper-link ieee">IEEE</a>
+                                <a href="#" class="paper-link arxiv">arXiv</a>
+                                <a href="#" class="paper-link video">Video</a>
+                                <a href="papers/paper1.html" class="paper-link project">Project Page</a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="list-item">
-                        <strong>“mmWave Radar-Based Non-Line-of-Sight Pedestrian Localization at T-Junctions Utilizing Road Layout Extraction via Camera [Ego-static Scenario]”</strong>
-                        Byeonggyu Park, Hee-Yeun Kim, Byonghyok Choi, Hansang Cho, Byungkwan Kim, Soomok Lee, Mingu Jeon, and Seong-Woo Kim
-                        <div class="list-meta">IROS, 2025</div>
-                        <div class="paper-links">
-                            <a href="#" class="paper-link secondary">PDF</a>
-                            <a href="#" class="paper-link secondary">Code</a>
-                            <a href="papers/paper2.html" class="paper-link primary">Project Page</a>
+                    <div class="list-item pub-item">
+                        <div class="pub-thumb">
+                            <img src="assets/pub1.jpg" alt="Ego-static scenario thumbnail">
+                        </div>
+                        <div class="pub-content">
+                            <strong>“mmWave Radar-Based Non-Line-of-Sight Pedestrian Localization at T-Junctions Utilizing Road Layout Extraction via Camera [Ego-static Scenario]”</strong>
+                            <div class="pub-authors">
+                                Byeonggyu Park, Hee-Yeun Kim, Byonghyok Choi, Hansang Cho, Byungkwan Kim,
+                                Soomok Lee, Mingu Jeon, and Seong-Woo Kim
+                            </div>
+                            <div class="list-meta">IROS, 2025</div>
+                            <div class="paper-links">
+                                <a href="#" class="paper-link ieee">IEEE</a>
+                                <a href="#" class="paper-link arxiv">arXiv</a>
+                                <a href="#" class="paper-link video">Video</a>
+                                <a href="papers/paper2.html" class="paper-link project">Project Page</a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="list-item">
-                        <strong>“Radar-Based NLoS Pedestrian Localization for Darting-Out Scenarios Near Parked Vehicles with Camera-Assisted Point Cloud Interpretation [Darting-out]”</strong>
-                        Hee-Yeun Kim, Byeonggyu Park, Byonghyok Choi, Hansang Cho, Byungkwan Kim, Soomok Lee, Mingu Jeon, Seung-Woo Seo, and Seong-Woo Kim
-                        <div class="list-meta">IROS, 2025</div>
-                        <div class="paper-links">
-                            <a href="#" class="paper-link secondary">PDF</a>
-                            <a href="#" class="paper-link secondary">Code</a>
-                            <a href="papers/paper2.html" class="paper-link primary">Project Page</a>
+                    <div class="list-item pub-item">
+                        <div class="pub-thumb">
+                            <img src="assets/pub2.jpg" alt="Darting-out scenario thumbnail">
                         </div>
-                    </div>
-                    
-                    <div class="list-item">
-                        <strong>“Non-Line-of-Sight Multi-Target Localization in T-Junctions Using Ray Tracing of mmWave Radar [Multi-target]”</strong>
-                        Mingu Jeon, Byeonggyu Park, Hee-Yeun Kim, Yujeong Kang, Byonghyok Choi, Hansang Cho, Byungkwan Kim, Soomok Lee, Seung-Woo Seo, and Seong-Woo Kim
-                        <div class="list-meta">IV, 2025</div>
-                        <div class="paper-links">
-                            <a href="#" class="paper-link secondary">PDF</a>
-                            <a href="#" class="paper-link secondary">Code</a>
-                            <a href="papers/paper2.html" class="paper-link primary">Project Page</a>
+                        <div class="pub-content">
+                            <strong>“Radar-Based NLoS Pedestrian Localization for Darting-Out Scenarios Near Parked Vehicles with Camera-Assisted Point Cloud Interpretation [Darting-out]”</strong>
+                            <div class="pub-authors">
+                                Hee-Yeun Kim, Byeonggyu Park, Byonghyok Choi, Hansang Cho, Byungkwan Kim,
+                                Soomok Lee, Mingu Jeon, Seung-Woo Seo, and Seong-Woo Kim
+                            </div>
+                            <div class="list-meta">IROS, 2025</div>
+                            <div class="paper-links">
+                                <a href="#" class="paper-link ieee">IEEE</a>
+                                <a href="#" class="paper-link arxiv">arXiv</a>
+                                <a href="#" class="paper-link video">Video</a>
+                                <a href="papers/paper3.html" class="paper-link project">Project Page</a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="list-item">
-                        <strong>“Non-Line-of-Sight Vehicle Localization based on Sound [Acoustic]”</strong>
-                        Mingu Jeon, Jae-Kyung Cho, Hee-Yeun Kim, Byeonggyu Park, Seung-Woo Seo, and Seong-Woo Kim
-                        <div class="list-meta">T-ITS, 2025</div>
-                        <div class="paper-links">
-                            <a href="#" class="paper-link secondary">PDF</a>
-                            <a href="#" class="paper-link secondary">Code</a>
-                            <a href="papers/paper2.html" class="paper-link primary">Project Page</a>
+                    <div class="list-item pub-item">
+                        <div class="pub-thumb">
+                            <img src="assets/pub3.jpg" alt="Multi-target localization thumbnail">
+                        </div>
+                        <div class="pub-content">
+                            <strong>“Non-Line-of-Sight Multi-Target Localization in T-Junctions Using Ray Tracing of mmWave Radar [Multi-target]”</strong>
+                            <div class="pub-authors">
+                                Mingu Jeon, Byeonggyu Park, Hee-Yeun Kim, Yujeong Kang, Byonghyok Choi,
+                                Hansang Cho, Byungkwan Kim, Soomok Lee, Seung-Woo Seo, and Seong-Woo Kim
+                            </div>
+                            <div class="list-meta">IV, 2025</div>
+                            <div class="paper-links">
+                                <a href="#" class="paper-link ieee">IEEE</a>
+                                <a href="#" class="paper-link arxiv">arXiv</a>
+                                <a href="#" class="paper-link video">Video</a>
+                                <a href="papers/paper4.html" class="paper-link project">Project Page</a>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="list-item pub-item">
+                        <div class="pub-thumb">
+                            <img src="assets/pub4.jpg" alt="Acoustic localization thumbnail">
+                        </div>
+                        <div class="pub-content">
+                            <strong>“Non-Line-of-Sight Vehicle Localization based on Sound [Acoustic]”</strong>
+                            <div class="pub-authors">
+                                Mingu Jeon, Jae-Kyung Cho, Hee-Yeun Kim, Byeonggyu Park,
+                                Seung-Woo Seo, and Seong-Woo Kim
+                            </div>
+                            <div class="list-meta">T-ITS, 2025</div>
+                            <div class="paper-links">
+                                <a href="#" class="paper-link ieee">IEEE</a>
+                                <a href="#" class="paper-link arxiv">arXiv</a>
+                                <a href="#" class="paper-link video">Video</a>
+                                <a href="papers/paper5.html" class="paper-link project">Project Page</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
